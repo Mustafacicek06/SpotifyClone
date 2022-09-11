@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         self.window = window
         
+        print(AuthManager.shared.singInUrl?.absoluteString)
         return true
     }
 

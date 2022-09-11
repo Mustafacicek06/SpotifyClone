@@ -32,6 +32,7 @@
 		08CDFCB328CDFB5100E2C237 /* SpotifyCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CDFCB228CDFB5100E2C237 /* SpotifyCloneTests.swift */; };
 		08CDFCBD28CDFB5100E2C237 /* SpotifyCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CDFCBC28CDFB5100E2C237 /* SpotifyCloneUITests.swift */; };
 		08CDFCBF28CDFB5100E2C237 /* SpotifyCloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CDFCBE28CDFB5100E2C237 /* SpotifyCloneUITestsLaunchTests.swift */; };
+		08FBD8C728CE0FF7009C6E4F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FBD8C628CE0FF7009C6E4F /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		08CDFCB828CDFB5100E2C237 /* SpotifyCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotifyCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08CDFCBC28CDFB5100E2C237 /* SpotifyCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyCloneUITests.swift; sourceTree = "<group>"; };
 		08CDFCBE28CDFB5100E2C237 /* SpotifyCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		08FBD8C628CE0FF7009C6E4F /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,14 @@
 				088DDE8028CDFF490079DD34 /* SearchResultsViewController.swift */,
 			);
 			path = SubPages;
+			sourceTree = "<group>";
+		};
+		088DDE9028CE0FBC0079DD34 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				08FBD8C628CE0FF7009C6E4F /* UIView+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		08CDFC8F28CDFB5000E2C237 = {
@@ -224,6 +234,7 @@
 		08CDFCCF28CDFC6400E2C237 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				088DDE9028CE0FBC0079DD34 /* Extensions */,
 				08CDFCA428CDFB5100E2C237 /* Assets.xcassets */,
 				08CDFC9B28CDFB5000E2C237 /* AppDelegate.swift */,
 				08CDFC9D28CDFB5000E2C237 /* SceneDelegate.swift */,
@@ -370,6 +381,7 @@
 				088DDE6C28CDFE0C0079DD34 /* TabBarViewController.swift in Sources */,
 				088DDE8728CDFFB90079DD34 /* HapticsManager.swift in Sources */,
 				088DDE8B28CDFFDF0079DD34 /* AudioTrack.swift in Sources */,
+				08FBD8C728CE0FF7009C6E4F /* UIView+.swift in Sources */,
 				08CDFCA028CDFB5000E2C237 /* HomeViewController.swift in Sources */,
 				088DDE8528CDFF7D0079DD34 /* ApiManager.swift in Sources */,
 				088DDE7428CDFEA70079DD34 /* AuthViewController.swift in Sources */,
