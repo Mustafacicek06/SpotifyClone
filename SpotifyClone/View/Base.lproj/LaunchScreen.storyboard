@@ -17,17 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spotify_Logo_CMYK_Green" translatesAutoresizingMaskIntoConstraints="NO" id="rxF-qA-XvX">
-                                <rect key="frame" x="75" y="343" width="240" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spotify_Logo_CMYK_Green" translatesAutoresizingMaskIntoConstraints="NO" id="fNF-qV-0DI">
+                                <rect key="frame" x="75" y="340" width="240" height="128"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rxF-qA-XvX" secondAttribute="bottom" constant="339" id="q0S-yZ-edn"/>
-                            <constraint firstItem="rxF-qA-XvX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="tPN-Hl-nbm"/>
-                            <constraint firstItem="rxF-qA-XvX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="vdP-vu-IR9"/>
-                            <constraint firstItem="rxF-qA-XvX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="296" id="zBr-EQ-kpb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fNF-qV-0DI" secondAttribute="bottom" constant="342" id="C6a-kL-hGh"/>
+                            <constraint firstItem="fNF-qV-0DI" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WN1-8S-K4E"/>
+                            <constraint firstItem="fNF-qV-0DI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="ccU-46-yOa"/>
+                            <constraint firstItem="fNF-qV-0DI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="293" id="mqm-9I-Nvf"/>
                         </constraints>
                     </view>
                 </viewController>
