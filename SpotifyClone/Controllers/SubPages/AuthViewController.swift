@@ -32,7 +32,7 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
         view.backgroundColor = .systemBackground
         webView.navigationDelegate = self
         view.addSubview(webView)
-        guard let url = AuthManager.shared.singInUrl else {
+        guard let url = AuthManager.shared.signInURL else {
             return
         }
         webView.load(URLRequest(url: url))
