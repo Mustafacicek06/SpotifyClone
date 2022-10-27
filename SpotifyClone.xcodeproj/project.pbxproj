@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		081CE35E290B2A3800FD31E6 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081CE35D290B2A3800FD31E6 /* SettingsModels.swift */; };
+		081CE361290B342A00FD31E6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 081CE360290B342A00FD31E6 /* SDWebImage */; };
 		088DDE6C28CDFE0C0079DD34 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DDE6B28CDFE0C0079DD34 /* TabBarViewController.swift */; };
 		088DDE6E28CDFE3E0079DD34 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DDE6D28CDFE3E0079DD34 /* SearchViewController.swift */; };
 		088DDE7028CDFE590079DD34 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DDE6F28CDFE590079DD34 /* LibraryViewController.swift */; };
@@ -55,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		081CE35D290B2A3800FD31E6 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		088DDE6B28CDFE0C0079DD34 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		088DDE6D28CDFE3E0079DD34 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		088DDE6F28CDFE590079DD34 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				081CE361290B342A00FD31E6 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +227,7 @@
 				088DDE8C28CDFFEB0079DD34 /* Artist.swift */,
 				088DDE8E28CDFFF40079DD34 /* UserProfile.swift */,
 				08FBD8C828CE285E009C6E4F /* AuthResponse.swift */,
+				081CE35D290B2A3800FD31E6 /* SettingsModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -264,6 +269,9 @@
 			dependencies = (
 			);
 			name = SpotifyClone;
+			packageProductDependencies = (
+				081CE360290B342A00FD31E6 /* SDWebImage */,
+			);
 			productName = SpotifyClone;
 			productReference = 08CDFC9828CDFB5000E2C237 /* SpotifyClone.app */;
 			productType = "com.apple.product-type.application";
@@ -336,6 +344,9 @@
 				Base,
 			);
 			mainGroup = 08CDFC8F28CDFB5000E2C237;
+			packageReferences = (
+				081CE35F290B342A00FD31E6 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 08CDFC9928CDFB5000E2C237 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -382,6 +393,7 @@
 				088DDE8928CDFFD40079DD34 /* Playlist.swift in Sources */,
 				088DDE8328CDFF6C0079DD34 /* AuthManager.swift in Sources */,
 				088DDE8128CDFF490079DD34 /* SearchResultsViewController.swift in Sources */,
+				081CE35E290B2A3800FD31E6 /* SettingsModels.swift in Sources */,
 				088DDE7628CDFECC0079DD34 /* WelcomeViewController.swift in Sources */,
 				088DDE7B28CDFF100079DD34 /* ProfileViewController.swift in Sources */,
 				088DDE6C28CDFE0C0079DD34 /* TabBarViewController.swift in Sources */,
@@ -732,6 +744,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		081CE35F290B342A00FD31E6 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		081CE360290B342A00FD31E6 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 081CE35F290B342A00FD31E6 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 08CDFC9028CDFB5000E2C237 /* Project object */;
 }
