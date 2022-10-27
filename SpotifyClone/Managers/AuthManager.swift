@@ -19,37 +19,37 @@ struct SpotifyConstants {
 
 final class AuthManager {
     static let shared = AuthManager()
-    
-    
-    
-    private init() {}
-    
-    lazy public var singInUrl: URL? =  {
- 
-    
+    private var refreshingToken = false
+
+
+    private init() { }
+
+    lazy public var singInUrl: URL? = {
+
+
         let path = "\(SpotifyConstants.baseURL)authorize?response_type=code&client_id=\(SpotifyConstants.clientID)&scope=\(SpotifyConstants.scopes)&redirect_uri=\(SpotifyConstants.redirectURI)&show_dialog=TRUE"
-        
-        
+
+
         return URL(string: path)
     }()
-    
-    
+
+
     lazy var isSignedIn: Bool = {
         return accessToken != nil
     }()
-    
+
     lazy private var accessToken: String? = {
         return UserDefaults.standard.string(forKey: UserDefaultsKeys.accessToken.rawValue)
     }()
-    
+
     lazy private var refreshToken: String? = {
         return UserDefaults.standard.string(forKey: UserDefaultsKeys.refreshToken.rawValue)
     }()
-    
+
     lazy private var tokenExpirationDate: Date? = {
         return UserDefaults.standard.object(forKey: UserDefaultsKeys.expirationDate.rawValue) as? Date
     }()
-    
+
     lazy private var shouldRefreshToken: Bool = {
         guard let expirationdate = tokenExpirationDate else {
             return false
@@ -58,140 +58,175 @@ final class AuthManager {
         let fiveMinutes: TimeInterval = 300
         return currentDate.addingTimeInterval(fiveMinutes) >= expirationdate
     }()
-    
-     public func exchangeCodeForToken(
+
+    public func exchangeCodeForToken(
         code: String,
         completion: @escaping ((Bool) -> Void)
-    
+
     ) {
         // Get Token
         guard let url = URL(string: SpotifyConstants.tokenAPIURL) else {
             return
         }
-        
+
         var components = URLComponents()
-        
+
         components.queryItems = [
             URLQueryItem(name: "grant_type", value: "authorization_token"),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "redirect_uri", value: SpotifyConstants.redirectURI)
         ]
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue( SpotifyConstants.urlEncoded , forHTTPHeaderField: "Content-Type")
+        request.setValue(SpotifyConstants.urlEncoded, forHTTPHeaderField: "Content-Type")
         request.httpBody = components.query?.data(using: .utf8)
-        
-        let basicToken = SpotifyConstants.clientID+":"+SpotifyConstants.secretClientID
+
+        let basicToken = SpotifyConstants.clientID + ":" + SpotifyConstants.secretClientID
         let data = basicToken.data(using: .utf8)
         guard let base64String = data?.base64EncodedString() else {
             print("Failure to get base64")
             completion(false)
             return
         }
-        
-        request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization" )
-        
+
+        request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
+
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             guard let data = data, error == nil else {
                 completion(false)
                 return
             }
-            
+
             do {
                 let result = try JSONDecoder().decode(AuthResponse.self, from: data)
-      
+
                 self?.cacheToken(result: result)
-                
-              
+
+
                 completion(true)
-                
+
             } catch {
                 print(error.localizedDescription)
                 completion(false)
             }
-            
+
         }.resume()
-        
-        
+
+
     }
     
-    public func refreshIfNeeded(completion: @escaping (Bool) -> Void){
-      
+    private var onRefreshBlocks = [ ((String) -> Void)]()
+    
+    public func withValidToken(completion: @escaping (String) -> Void) {
+        guard !refreshingToken else {
+            // append the completion
+            onRefreshBlocks.append(completion)
+            
+            return
+        }
+        if shouldRefreshToken {
+            refreshIfNeeded { [weak self] success in
+
+                if let token = self?.accessToken, success {
+                    completion(token)
+                }
+            }
+        }
+        else if let token = accessToken {
+            completion(token)
+        }
+    }
+
+    public func refreshIfNeeded(completion: @escaping (Bool) -> Void) {
+        guard !refreshingToken else {
+            return
+        }
+        guard shouldRefreshToken else {
+            completion(true)
+            return
+        }
         guard let refreshToken = self.refreshToken else {
             return
         }
-        
+
         guard let url = URL(string: SpotifyConstants.tokenAPIURL) else {
             return
         }
         
+        refreshingToken = true
+            
         var components = URLComponents()
-        
+
         components.queryItems = [
             URLQueryItem(name: "grant_type", value: "refresh_token"),
-       
+
             URLQueryItem(name: "refresh_token", value: refreshToken)
         ]
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue( SpotifyConstants.urlEncoded , forHTTPHeaderField: "Content-Type")
+        request.setValue(SpotifyConstants.urlEncoded, forHTTPHeaderField: "Content-Type")
         request.httpBody = components.query?.data(using: .utf8)
-        
-        let basicToken = SpotifyConstants.clientID+":"+SpotifyConstants.secretClientID
+
+        let basicToken = SpotifyConstants.clientID + ":" + SpotifyConstants.secretClientID
         let data = basicToken.data(using: .utf8)
         guard let base64String = data?.base64EncodedString() else {
             print("Failure to get base64")
             completion(false)
             return
         }
-        
-        request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization" )
-        
+
+        request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
+
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+            
+            self?.refreshingToken = false
+             
             guard let data = data, error == nil else {
                 completion(false)
                 return
             }
-            
+
             do {
                 let result = try JSONDecoder().decode(AuthResponse.self, from: data)
-                print("Succesfully refreshed." )
+                self?.onRefreshBlocks.forEach { $0(result.accessToken!) }
+                self?.onRefreshBlocks.removeAll()
+                
                 self?.cacheToken(result: result)
-                
-              
+
+
                 completion(true)
-                
+
             } catch {
                 print(error.localizedDescription)
                 completion(false)
             }
-            
+
         }.resume()
-        
-        
-        
+
+
+
     }
-    
+
     private func cacheToken(result: AuthResponse) {
         UserDefaults.standard.setValue(result.accessToken, forKey: UserDefaultsKeys.accessToken.rawValue)
-        
+
         if let refreshToken = result.refreshToken {
-            UserDefaults.standard.setValue(refreshToken, forKey: UserDefaultsKeys.refreshToken.rawValue  )
+            UserDefaults.standard.setValue(refreshToken, forKey: UserDefaultsKeys.refreshToken.rawValue)
         }
-      
-        UserDefaults.standard.setValue( Date().addingTimeInterval(TimeInterval(result.expiresInSecond ?? 0)) , forKey: UserDefaultsKeys.expirationDate.rawValue)
-        
-        
+
+        UserDefaults.standard.setValue(Date().addingTimeInterval(TimeInterval(result.expiresInSecond ?? 0)), forKey: UserDefaultsKeys.expirationDate.rawValue)
+
+
     }
-    
+
     enum UserDefaultsKeys: String {
         case accessToken = "access_token"
         case refreshToken = "refresh_token"
         case expirationDate = "expirationDate"
     }
-    
+
 }
 
 

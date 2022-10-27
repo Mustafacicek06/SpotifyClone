@@ -13,9 +13,20 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
+        
+        title = "Home"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
    
     }
     
+    @objc func didTapSettings() {
+        let vc = ProfileViewController()
+        vc.title = ""
+        navigationController?.pushViewController(vc, animated: true)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        
+    }
 
 
 }
