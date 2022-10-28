@@ -29,6 +29,10 @@ class TabBarViewController: UITabBarController {
         let navigationTwo = UINavigationController(rootViewController: vcTwo)
         let navigationThree = UINavigationController(rootViewController: vcThree)
         
+        // labe is dark mode in white , normal mode in black
+        navigationOne.navigationBar.tintColor = .label
+        navigationTwo.navigationBar.tintColor = .label
+        navigationThree.navigationBar.tintColor = .label
         
         navigationOne.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 1)
         navigationTwo.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)

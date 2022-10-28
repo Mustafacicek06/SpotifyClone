@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		081CE35E290B2A3800FD31E6 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081CE35D290B2A3800FD31E6 /* SettingsModels.swift */; };
 		081CE361290B342A00FD31E6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 081CE360290B342A00FD31E6 /* SDWebImage */; };
+		088DB03E290C8D0800C194B8 /* NewReleasesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DB03D290C8D0800C194B8 /* NewReleasesResponse.swift */; };
 		088DDE6C28CDFE0C0079DD34 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DDE6B28CDFE0C0079DD34 /* TabBarViewController.swift */; };
 		088DDE6E28CDFE3E0079DD34 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DDE6D28CDFE3E0079DD34 /* SearchViewController.swift */; };
 		088DDE7028CDFE590079DD34 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DDE6F28CDFE590079DD34 /* LibraryViewController.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		081CE35D290B2A3800FD31E6 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
+		088DB03D290C8D0800C194B8 /* NewReleasesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesResponse.swift; sourceTree = "<group>"; };
 		088DDE6B28CDFE0C0079DD34 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		088DDE6D28CDFE3E0079DD34 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		088DDE6F28CDFE590079DD34 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				088DDE8E28CDFFF40079DD34 /* UserProfile.swift */,
 				08FBD8C828CE285E009C6E4F /* AuthResponse.swift */,
 				081CE35D290B2A3800FD31E6 /* SettingsModels.swift */,
+				088DB03D290C8D0800C194B8 /* NewReleasesResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				081CE35E290B2A3800FD31E6 /* SettingsModels.swift in Sources */,
 				088DDE7628CDFECC0079DD34 /* WelcomeViewController.swift in Sources */,
 				088DDE7B28CDFF100079DD34 /* ProfileViewController.swift in Sources */,
+				088DB03E290C8D0800C194B8 /* NewReleasesResponse.swift in Sources */,
 				088DDE6C28CDFE0C0079DD34 /* TabBarViewController.swift in Sources */,
 				088DDE8728CDFFB90079DD34 /* HapticsManager.swift in Sources */,
 				08FBD8C928CE285E009C6E4F /* AuthResponse.swift in Sources */,

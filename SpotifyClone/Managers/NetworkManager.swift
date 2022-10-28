@@ -20,6 +20,7 @@ struct NetworkUrl {
 
 enum NetworkPaths: String {
     case ME = "me"
+    case NEW_RELEASES = "browse/new-releases?limit=1"
     
 }
 
@@ -55,13 +56,35 @@ final class NetworkManager {
         }
         
     }
-    // MARK: - Private
+    // MARK: - Public Functions
+    
+    public func getNewReleases(completion: @escaping((Result<String, Error>))-> Void) {
+        createRequest(with: URL(string: NetworkUrl.baseAPIURL + NetworkPaths.NEW_RELEASES.rawValue ), type: HTTPMethod.GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _ ,  error in
+                guard let data = data, error == nil else {
+                    completion(.failure(NetworkError.failedToGetData))
+                    return
+                }
+                
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options:  .allowFragments)
+                    print(json)
+                } catch {
+                    print(String(describing: error))
+                    completion(.failure(error))
+                }
+                
+            }
+            task.resume()
+        }
+    }
+   
     
     enum HTTPMethod: String {
         case GET
         case POST
     }
-    
+    // MARK: - Private
     private func createRequest(with url: URL?,type: HTTPMethod ,completion: @escaping (URLRequest) -> Void )  {
         AuthManager.shared.withValidToken { token in
             guard let apiURL = url else {
@@ -69,6 +92,7 @@ final class NetworkManager {
             }
             var request = URLRequest(url: apiURL )
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            
             
             request.httpMethod = type.rawValue
             request.timeoutInterval = 30
